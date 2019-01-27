@@ -6,3 +6,4 @@ services:
       context: .
     env_file:
       - .env
+    entrypoint: database_init.bash

@@ -6,7 +6,8 @@ RUN apt update -qqy && apt install git gcc g++ make python-dev libxml2-dev libxs
 apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
-apt install nginx -qqy
+apt install nginx -qqy && \
+apt install supervisor -qqy
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli
@@ -31,16 +32,20 @@ COPY dmoj_files/local_settings.py site/dmoj
 RUN ./site/make_style.sh
 RUN cd site && \
 export DATABASE_PASSWORD=${DATABASE_PASSWORD} && \
-service mysql start && \
+#service mysql start && \
 python manage.py collectstatic && \
 python manage.py compilemessages && \
 python manage.py compilejsi18n && \
 #python manage.py migrate && \
-python manage.py loaddata navbar && \
-python manage.py loaddata language_small && \
-python manage.py loaddata demo && \
+#python manage.py loaddata navbar && \
+#python manage.py loaddata language_small && \
+#python manage.py loaddata demo && \
 #python manage.py createsuperuser
 
-CMD ['python', 'manage.py', 'runserver', '0.0.0.0:8000']
+# supervisor managment
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord"]
+
+#CMD ['python', 'manage.py', 'runserver', '0.0.0.0:8000']
 
 
