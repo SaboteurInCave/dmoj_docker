@@ -15,12 +15,12 @@ RUN npm install -g sass pleeease-cli
 RUN mkdir -p /opt/dmoj
 WORKDIR /opt/dmoj
 
-# instal python dependencies
+# clone site and instal python dependencies
+RUN git clone https://github.com/DMOJ/site.git
 RUN git submodule site/init && RUN git submodule site/update
 RUN pip install -r requirements.txt && pip install mysqlclient
 
-# clone site and make assets
-RUN git clone https://github.com/DMOJ/site.git
+#  make assets
 RUN ./site/make_style.sh
 
 
