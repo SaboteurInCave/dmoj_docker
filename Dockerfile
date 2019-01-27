@@ -1,6 +1,8 @@
 FROM ubuntu:latest
 MAINTAINER saboteurinacave@gmail.com
 
+ENV PYTHONIOENCODING=utf-8
+
 # os dependencies
 RUN apt update -qqy && apt install git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
