@@ -13,8 +13,8 @@ apt install supervisor -qqy
 RUN npm install -g sass pleeease-cli
 
 # database initialization
-#RUN service mysql start && \
-#mysql -uroot --execute 'CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY "${DATABASE_PASSWORD}"'
+RUN service mysql start && \
+mysql -uroot --execute='CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY "${DATABASE_PASSWORD}"'
 
 # create workdir
 RUN mkdir -p /opt/dmoj
@@ -32,15 +32,15 @@ COPY dmoj_files/local_settings.py site/dmoj
 RUN ./site/make_style.sh
 RUN cd site && \
 export DATABASE_PASSWORD=${DATABASE_PASSWORD} && \
-#service mysql start && \
+service mysql start && \
 python manage.py collectstatic && \
 python manage.py compilemessages && \
 python manage.py compilejsi18n
-#python manage.py migrate && \
-#python manage.py loaddata navbar && \
-#python manage.py loaddata language_small && \
-#python manage.py loaddata demo && \
-#python manage.py createsuperuser
+python manage.py migrate && \
+python manage.py loaddata navbar && \
+python manage.py loaddata language_small && \
+python manage.py loaddata demo && \
+python manage.py createsuperuser
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
