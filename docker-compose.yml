@@ -2,8 +2,8 @@ version: '3'
 
 services:
   dmoj:
+    container_name: dmoj
     build:
       context: .
     env_file:
       - .env
-    entrypoint: database_init.bash

@@ -35,7 +35,7 @@ export DATABASE_PASSWORD=${DATABASE_PASSWORD} && \
 #service mysql start && \
 python manage.py collectstatic && \
 python manage.py compilemessages && \
-python manage.py compilejsi18n && \
+python manage.py compilejsi18n
 #python manage.py migrate && \
 #python manage.py loaddata navbar && \
 #python manage.py loaddata language_small && \
