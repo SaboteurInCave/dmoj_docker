@@ -14,7 +14,7 @@ RUN npm install -g sass pleeease-cli
 
 # database initialization
 RUN service mysql start && \
-mysql -uroot --execute="CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY 12345"
+mysql -uroot --execute="CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY '12345'"
 
 # create workdir
 RUN mkdir -p /opt/dmoj
@@ -31,7 +31,6 @@ COPY dmoj_files/local_settings.py site/dmoj
 #  make assets and other stuff
 RUN ./site/make_style.sh
 RUN cd site && \
-#export DATABASE_PASSWORD=${DATABASE_PASSWORD} && \
 service mysql start && \
 python manage.py collectstatic && \
 python manage.py compilemessages && \
