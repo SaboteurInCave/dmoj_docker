@@ -26,7 +26,7 @@ RUN cd site && git submodule init && git submodule update && \
 pip install -r requirements.txt && pip install mysqlclient
 
 # copy site settings
-COPY dmoj_files/local_settings.py site/dmoj
+COPY dmoj_files/local_settings_old.py site/dmoj
 
 #  make assets and other stuff
 RUN ./site/make_style.sh
