@@ -2,7 +2,7 @@ FROM ubuntu:latest
 MAINTAINER saboteurinacave@gmail.com
 
 # os dependencies
-RUN apt update -qqy && apt install git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3 python-pip -qqy && \
+RUN apt update -qqy && apt install git gcc g++ make python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
