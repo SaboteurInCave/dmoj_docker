@@ -33,14 +33,14 @@ RUN ./site/make_style.sh
 
 RUN cd site && \
 service mysql start && \
-python manage.py collectstatic && \
-python manage.py compilemessages && \
-python manage.py compilejsi18n && \
-python manage.py migrate && \
-python manage.py loaddata navbar && \
-python manage.py loaddata language_small && \
-python manage.py loaddata demo && \
-python manage.py createsuperuser
+python3 manage.py collectstatic && \
+python3 manage.py compilemessages && \
+python3 manage.py compilejsi18n && \
+python3 manage.py migrate && \
+python3 manage.py loaddata navbar && \
+python3 manage.py loaddata language_small && \
+python3 manage.py loaddata demo && \
+python3 manage.py createsuperuser
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
