@@ -23,7 +23,7 @@ WORKDIR /opt/dmoj
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
-pip install -r requirements.txt && pip install mysqlclient
+pip3 install -r requirements.txt && pip3 install mysqlclient
 
 # copy site settings
 COPY local_settings.py site/dmoj
