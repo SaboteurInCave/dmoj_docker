@@ -30,6 +30,9 @@ pip install -r requirements.txt && pip install mysqlclient
 # copy site settings
 COPY local_settings.py site/dmoj
 
+RUN cat site/dmoj/local_settings.py
+RUN file -i site/dmoj/local_settings.py
+
 #  make assets and other stuff
 RUN ./site/make_style.sh
 
