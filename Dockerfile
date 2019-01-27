@@ -44,6 +44,8 @@ python manage.py loaddata language_small && \
 python manage.py loaddata demo && \
 python manage.py createsuperuser
 
+VOLUME /opt/dmoj/site/dmoj
+
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
