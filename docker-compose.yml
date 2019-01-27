@@ -9,5 +9,3 @@ services:
       - .env
     ports:
       - 8000:8000
-    volumes:
-      - ./settings:/opt/dmoj/site/dmoj
