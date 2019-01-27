@@ -1,0 +1,31 @@
+FROM ubuntu:latest
+MAINTAINER saboteurinacave@gmail.com
+
+# os dependencies
+RUN apt update -qqy && apt install git gcc g++ make python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl python3 python3-dev python3-pip python-pip -qqy && \
+apt install nodejs -qqy && \
+apt install npm -qqy && \
+apt install mariadb-server libmysqlclient-dev -qqy && \
+apt install nginx -qqy
+
+# npm dependencies
+RUN npm install -g sass pleeease-cli
+
+# database initialization
+RUN mysql -uroot --execute 'CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY ${DATABASE_PASSWORD}'
+
+# create workdir
+RUN mkdir -p /opt/dmoj
+WORKDIR /opt/dmoj
+
+# clone site and instal python dependencies
+RUN git clone https://github.com/DMOJ/site.git
+RUN cd site && git submodule init && git submodule update && \
+pip install -r requirements.txt && pip install mysqlclient
+
+#  make assets
+RUN ./site/make_style.sh
+
+
+
+

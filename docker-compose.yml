@@ -1,6 +1,8 @@
 version: '3'
 
 services:
-  frontend:
+  dmoj:
     build:
-      context: frontend
+      context: .
+    env_file:
+      - .env
