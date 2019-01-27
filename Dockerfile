@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER saboteurinacave@gmail.com
 
-ENV PYTHONIOENCODING=utf-8
+
 
 # os dependencies
 RUN apt update -qqy && apt install git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
@@ -10,6 +10,11 @@ apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
+
+RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8'
+ENV LANGUAGE='en_US:en'
+ENV LC_ALL='en_US.UTF-8'
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli
