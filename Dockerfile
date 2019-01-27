@@ -2,14 +2,12 @@ FROM ubuntu:latest
 MAINTAINER saboteurinacave@gmail.com
 
 # os dependencies
-RUN apt update -qqy && apt install git gcc g++ make python python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
+RUN apt update -qqy && apt install git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
-
-RUN wget -q --no-check-certificate -O- https://bootstrap.pypa.io/get-pip.py | sudo python
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli
