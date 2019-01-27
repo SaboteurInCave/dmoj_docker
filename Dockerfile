@@ -10,7 +10,6 @@ apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
-
 # npm dependencies
 RUN npm install -g sass pleeease-cli
 
