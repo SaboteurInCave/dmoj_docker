@@ -43,7 +43,7 @@ DATABASES = {
         'PASSWORD': 'qwerty',
         'HOST': '127.0.0.1',
         'OPTIONS': {
-            'charset': 'utf8mb4',
+            'charset': 'utf8',
             'sql_mode': 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION',
         },
     }

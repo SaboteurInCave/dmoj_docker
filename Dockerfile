@@ -3,9 +3,6 @@ MAINTAINER saboteurinacave@gmail.com
 
 ENV PYTHONIOENCODING=utf-8
 
-RUN apt-key -y adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-RUN add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.3/ubuntu bionic main'
-
 # os dependencies
 RUN apt update -qqy && apt install locales git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
@@ -19,7 +16,7 @@ RUN npm install -g sass pleeease-cli
 
 # database initialization
 RUN service mysql start && \
-mysql -uroot --execute="CREATE DATABASE dmoj DEFAULT CHARACTER SET utf-8 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY 'qwerty'"
+mysql -uroot --execute="CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY 'qwerty'"
 
 # create workdir
 RUN mkdir -p /opt/dmoj
