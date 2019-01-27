@@ -12,7 +12,8 @@ apt install nginx -qqy
 RUN npm install -g sass pleeease-cli
 
 # database initialization
-RUN mysql -uroot --execute 'CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY ${DATABASE_PASSWORD}'
+RUN service mysql start && \
+mysql -uroot --execute 'CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY "${DATABASE_PASSWORD}"'
 
 # create workdir
 RUN mkdir -p /opt/dmoj
@@ -22,6 +23,9 @@ WORKDIR /opt/dmoj
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
 pip install -r requirements.txt && pip install mysqlclient
+
+# copy site settings
+COPY dmoj_files/local_settings.py site/dmoj
 
 #  make assets
 RUN ./site/make_style.sh
