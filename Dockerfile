@@ -25,13 +25,11 @@ WORKDIR /opt/dmoj
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
-pip install -r requirements.txt && pip install mysqlclient<1.4
+pip install -r requirements.txt && pip install 'mysqlclient < 1.4'
+# important note: on mysqlclient==1.4 everything is broken!
 
 # copy site settings
 COPY local_settings.py site/dmoj
-
-RUN cat site/dmoj/local_settings.py
-RUN file -i site/dmoj/local_settings.py
 
 #  make assets and other stuff
 RUN ./site/make_style.sh
@@ -50,7 +48,3 @@ python manage.py createsuperuser
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 CMD ["/usr/bin/supervisord"]
-
-#CMD ['python', 'manage.py', 'runserver', '0.0.0.0:8000']
-
-

@@ -12,7 +12,7 @@ import os
 # SECURITY WARNING: keep the secret key used in production secret!
 # You may use <http://www.miniwebtool.com/django-secret-key-generator/>
 # to generate this key.
-SECRET_KEY = 'This key is not very secure and you should change it.'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # Change to False once you are done with runserver testing.
