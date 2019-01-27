@@ -2,12 +2,14 @@ FROM ubuntu:latest
 MAINTAINER saboteurinacave@gmail.com
 
 # os dependencies
-RUN apt update -qqy && apt install git gcc g++ make python3 python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
+RUN apt update -qqy && apt install git gcc g++ make python python-dev libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
+
+RUN wget -q --no-check-certificate -O- https://bootstrap.pypa.io/get-pip.py | sudo python
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli
@@ -23,9 +25,7 @@ WORKDIR /opt/dmoj
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
-pip3 install -r requirements.txt && pip3 install mysqlclient
-
-RUN python --version
+pip install -r requirements.txt && pip install mysqlclient
 
 # copy site settings
 COPY local_settings.py site/dmoj
@@ -35,14 +35,14 @@ RUN ./site/make_style.sh
 
 RUN cd site && \
 service mysql start && \
-python3 manage.py collectstatic && \
-python3 manage.py compilemessages && \
-python3 manage.py compilejsi18n && \
-python3 manage.py migrate && \
-python3 manage.py loaddata navbar && \
-python3 manage.py loaddata language_small && \
-python3 manage.py loaddata demo && \
-python3 manage.py createsuperuser
+python manage.py collectstatic && \
+python manage.py compilemessages && \
+python manage.py compilejsi18n && \
+python manage.py migrate && \
+python manage.py loaddata navbar && \
+python manage.py loaddata language_small && \
+python manage.py loaddata demo && \
+python manage.py createsuperuser
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
