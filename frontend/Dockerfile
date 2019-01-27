@@ -17,8 +17,8 @@ WORKDIR /opt/dmoj
 
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
-RUN git submodule site/init && RUN git submodule site/update
-RUN pip install -r requirements.txt && pip install mysqlclient
+RUN cd site && git submodule init && RUN submodule site/update && \
+pip install -r requirements.txt && pip install mysqlclient
 
 #  make assets
 RUN ./site/make_style.sh
