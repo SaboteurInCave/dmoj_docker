@@ -30,12 +30,12 @@ COPY dmoj_files/local_settings.py site/dmoj
 
 #  make assets and other stuff
 RUN ./site/make_style.sh
-RUN cd site && \
+#RUN cd site && \
 #export DATABASE_PASSWORD=${DATABASE_PASSWORD} && \
 #service mysql start && \
-python manage.py collectstatic && \
-python manage.py compilemessages && \
-python manage.py compilejsi18n
+#python manage.py collectstatic && \
+#python manage.py compilemessages && \
+#python manage.py compilejsi18n
 #&& \
 #python manage.py migrate && \
 #python manage.py loaddata navbar && \
