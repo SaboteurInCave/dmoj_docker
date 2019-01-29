@@ -56,7 +56,7 @@ DATABASES = {
 # Internationalization.
 # Documentation: <https://docs.djangoproject.com/en/1.11/topics/i18n/>
 LANGUAGE_CODE = 'ru-RU'
-DEFAULT_USER_TIME_ZONE = 'Russia/Moscow'
+DEFAULT_USER_TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
@@ -123,7 +123,7 @@ SERVER_EMAIL = 'Don Mills Online Judge <errors@dmoj.ca>'
 # webserver to serve the static files. This is the directory where all the
 # static files DMOJ uses will be collected to.
 # You must configure your webserver to serve this directory as /static/ in production.
-STATIC_ROOT = '/tmp/static'
+STATIC_ROOT = '/opt/static'
 
 # URL to access static files.
 #STATIC_URL = '/static/'
