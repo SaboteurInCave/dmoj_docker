@@ -11,19 +11,8 @@ apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
 
-# create problems volume
-RUN mkdir -p /opt/problems
-
-# Volumes creation
-VOLUME ["/var/lib/mysql", "/opt/problems"]
-
-
 # npm dependencies
 RUN npm install -g sass pleeease-cli && npm install qu ws simplesets
-
-# database initialization
-RUN service mysql start && \
-mysql -uroot --execute="CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci; GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY 'qwerty'"
 
 # create workdir
 RUN mkdir -p /opt/dmoj
@@ -40,23 +29,27 @@ COPY local_settings.py site/dmoj
 COPY uwsgi.ini site/
 COPY config.js site/websocket
 
+WORKDIR /opt/dmoj/site
+
+#  make assets and other stuff
+RUN ./make_style.sh
+
+# static files and localization
+RUN echo yes | python manage.py collectstatic && \
+python manage.py compilemessages && \
+python manage.py compilejsi18n && \
+
+COPY dataLoading.bash .
+
 # copy nginx configiration
 COPY nginx.conf /etc/nginx/sites-available/nginx.conf
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 
-#  make assets and other stuff
-RUN ./site/make_style.sh
+# create problems volume
+RUN mkdir -p /opt/problems
 
-RUN cd site && \
-service mysql start && \
-echo yes | python manage.py collectstatic && \
-python manage.py compilemessages && \
-python manage.py compilejsi18n && \
-python manage.py migrate && \
-python manage.py loaddata navbar && \
-python manage.py loaddata language_small && \
-python manage.py loaddata demo
-
+# Volumes creation
+VOLUME "/opt/problems
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf

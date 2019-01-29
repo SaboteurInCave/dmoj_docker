@@ -41,7 +41,7 @@ DATABASES = {
         'NAME': 'dmoj',
         'USER': 'dmoj',
         'PASSWORD': 'qwerty',
-        'HOST': '127.0.0.1',
+        'HOST': 'database',
         'OPTIONS': {
             'charset': 'utf8',
             'sql_mode': 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION',
@@ -149,7 +149,7 @@ PROBLEM_DATA_ROOT = '/opt/problems'
 BRIDGED_JUDGE_ADDRESS = [('localhost', 9999)]
 
 # The bridged daemon bind address and port to communicate with the site.
-#BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
+BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
 
 ## DMOJ features.
 # Set to True to enable full-text searching for problems.

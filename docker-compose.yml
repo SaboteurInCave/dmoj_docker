@@ -9,6 +9,18 @@ services:
       - .env
     ports:
       - 8000:8000
+      - 9999:9999
+      - 9998:9998
+      - 15100:15100
+      - 15101:15101
+      - 15102:15102
     volumes:
       - ./problems:/opt/problems
+    depends_on:
+      - database
+  database:
+    container_name: dmoj_db
+    image: mariadb:latest
+    volumes:
       - ./db:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
