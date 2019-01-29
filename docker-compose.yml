@@ -23,7 +23,7 @@ services:
     image: mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
-      MYSQL_DATABASE: dmoj
+      MYSQL_DATABASE: test
       MYSQL_USER: dmoj
       MYSQL_PASSWORD: qwerty
     volumes:
