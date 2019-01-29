@@ -21,6 +21,11 @@ services:
   database:
     container_name: dmoj_db
     image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_DATABASE: dmoj
+      MYSQL_USER: dmoj
+      MYSQL_PASSWORD: qwerty
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
