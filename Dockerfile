@@ -49,7 +49,7 @@ RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 RUN mkdir -p /opt/problems
 
 # Volumes creation
-VOLUME "/opt/problems
+VOLUME "/opt/problems"
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
