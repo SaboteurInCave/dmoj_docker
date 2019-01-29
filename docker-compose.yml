@@ -21,6 +21,7 @@ services:
   database:
     container_name: dmoj_db
     image: mariadb:latest
+    hostname: database
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
       MYSQL_DATABASE: test
