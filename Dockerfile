@@ -9,9 +9,11 @@ apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
-apt install supervisor -qqy
+apt install supervisor -qqy && \
+apt install nginx
+
 # npm dependencies
-RUN npm install -g sass pleeease-cli
+RUN npm install -g sass pleeease-cli && npm install qu ws simplesets
 
 # database initialization
 RUN service mysql start && \
@@ -24,7 +26,7 @@ WORKDIR /opt/dmoj
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
-pip install -r requirements.txt && pip install 'mysqlclient < 1.4'
+pip install -r requirements.txt && pip install 'mysqlclient < 1.4' && pip install uwsgi
 # important note: on mysqlclient==1.4 everything is broken!
 
 # copy site settings
@@ -41,8 +43,10 @@ python manage.py compilejsi18n && \
 python manage.py migrate && \
 python manage.py loaddata navbar && \
 python manage.py loaddata language_small && \
-python manage.py loaddata demo && \
-python manage.py createsuperuser
+python manage.py loaddata demo 
+#&& \
+#python manage.py loaddata demo && \
+#python manage.py createsuperuser
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
