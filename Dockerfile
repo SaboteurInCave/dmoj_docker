@@ -42,7 +42,7 @@ RUN ./site/make_style.sh
 
 RUN cd site && \
 service mysql start && \
-python manage.py collectstatic && \
+echo yes | python manage.py collectstatic && \
 python manage.py compilemessages && \
 python manage.py compilejsi18n && \
 python manage.py migrate && \
