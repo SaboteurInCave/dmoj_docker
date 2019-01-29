@@ -3,6 +3,7 @@ MAINTAINER saboteurinacave@gmail.com
 
 ENV PYTHONIOENCODING=utf-8
 
+
 # os dependencies
 RUN apt update -qqy && apt install locales git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
@@ -49,6 +50,12 @@ python manage.py migrate && \
 python manage.py loaddata navbar && \
 python manage.py loaddata language_small && \
 python manage.py loaddata demo
+
+# create problems volume
+RUN mkdir -p /opt/problems
+
+# Volumes creation
+VOLUME ["/var/lib/mysql", "/opt/problems"]
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf

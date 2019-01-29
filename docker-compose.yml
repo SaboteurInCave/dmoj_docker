@@ -10,5 +10,5 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - problems:/opt/problems/
-      - db:/var/lib/mysql
+      - ./problems:/opt/problems
+      - ./db:/var/lib/mysql
