@@ -43,7 +43,7 @@ python manage.py compilejsi18n && \
 python manage.py migrate && \
 python manage.py loaddata navbar && \
 python manage.py loaddata language_small && \
-python manage.py loaddata demo 
+python manage.py loaddata demo
 #&& \
 #python manage.py loaddata demo && \
 #python manage.py createsuperuser
