@@ -3,7 +3,6 @@ MAINTAINER saboteurinacave@gmail.com
 
 ENV PYTHONIOENCODING=utf-8
 
-
 # os dependencies
 RUN apt update -qqy && apt install locales git gcc g++ make python python-dev python-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl  -qqy && \
 apt install nodejs -qqy && \
@@ -11,6 +10,13 @@ apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
 apt install supervisor -qqy
+
+# create problems volume
+RUN mkdir -p /opt/problems
+
+# Volumes creation
+VOLUME ["/var/lib/mysql", "/opt/problems"]
+
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli && npm install qu ws simplesets
@@ -51,11 +57,6 @@ python manage.py loaddata navbar && \
 python manage.py loaddata language_small && \
 python manage.py loaddata demo
 
-# create problems volume
-RUN mkdir -p /opt/problems
-
-# Volumes creation
-VOLUME ["/var/lib/mysql", "/opt/problems"]
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
