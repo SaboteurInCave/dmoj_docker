@@ -9,8 +9,7 @@ apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
-apt install supervisor -qqy && \
-apt install nginx
+apt install supervisor -qqy
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli && npm install qu ws simplesets
@@ -31,6 +30,12 @@ pip install -r requirements.txt && pip install 'mysqlclient < 1.4' && pip instal
 
 # copy site settings
 COPY local_settings.py site/dmoj
+COPY uwsgi.ini site/
+COPY config.js site/websocket
+
+# copy nginx configiration
+COPY nginx.conf /etc/nginx/sites-available/nginx.conf
+RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
 
 #  make assets and other stuff
 RUN ./site/make_style.sh
@@ -44,9 +49,6 @@ python manage.py migrate && \
 python manage.py loaddata navbar && \
 python manage.py loaddata language_small && \
 python manage.py loaddata demo
-#&& \
-#python manage.py loaddata demo && \
-#python manage.py createsuperuser
 
 # supervisor managment
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
