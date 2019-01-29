@@ -37,7 +37,7 @@ RUN ./make_style.sh
 # static files and localization
 RUN echo yes | python manage.py collectstatic && \
 python manage.py compilemessages && \
-python manage.py compilejsi18n && \
+python manage.py compilejsi18n
 
 COPY dataLoading.bash .
 
