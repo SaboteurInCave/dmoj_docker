@@ -9,3 +9,6 @@ services:
       - .env
     ports:
       - 8000:8000
+    volumes:
+      - problems:/opt/problems/
+      - db:/var/lib/mysql
