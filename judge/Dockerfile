@@ -18,4 +18,8 @@ RUN mkdir -p /problems
 RUN git clone https://github.com/DMOJ/judge
 WORKDIR /judge
 
+# clone config file
+RUN mkdir -p config
+COPY judge.yml config
+
 RUN env DMOJ_REDIST=1 python setup.py develop && rm -rf build/

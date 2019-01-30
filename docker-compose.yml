@@ -39,7 +39,7 @@ services:
       - problems:/problems
     env_file:
       - .env_judge
-    command: bash -c "python dmoj ${SERVER_HOST} ${JUDGE_NAME} ${JUDGE_KEY}"
+    command: bash -c "python dmoj -c /judge/config/judge.yml ${SERVER_HOST} ${JUDGE_NAME} ${JUDGE_KEY}"
 
 volumes:
   problems:

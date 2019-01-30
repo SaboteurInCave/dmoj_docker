@@ -29,10 +29,10 @@ Secondly, you need to create _.env_db_ and _.env_judge_ env files with the follo
 
 .env_db:
 
-    MYSQL_ROOT_PASSWORD: <ROOT_PASSWORD>
-    MYSQL_DATABASE: test
-    MYSQL_USER: dmoj
-    MYSQL_PASSWORD: <USER_DMOJ_PASSWORD>
+    MYSQL_ROOT_PASSWORD=<ROOT_PASSWORD>
+    MYSQL_DATABASE=test
+    MYSQL_USER=dmoj
+    MYSQL_PASSWORD=<USER_DMOJ_PASSWORD>
 
  
 If you change _MYSQL_PASSWORD_, please copy that value into _sql/init.sql_ for the password and for _local_setting.py_:
