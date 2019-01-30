@@ -25,11 +25,8 @@ services:
   dmoj_db:
     container_name: dmoj_db
     image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: qwerty
-      MYSQL_DATABASE: test
-      MYSQL_USER: dmoj
-      MYSQL_PASSWORD: qwerty
+    env_file:
+      - .env_db
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
@@ -40,6 +37,9 @@ services:
       context: judge
     volumes:
       - problems:/problems
+    env_file:
+      - .env_judge
+    command: bash -c "python dmoj ${SERVER_HOST} ${JUDGE_NAME} ${JUDGE_KEY}"
 
 volumes:
   problems:

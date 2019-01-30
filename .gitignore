@@ -1,2 +1,3 @@
 .idea/*
-/.env
+/.env_judge
+/.env_db

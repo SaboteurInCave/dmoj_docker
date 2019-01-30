@@ -10,7 +10,7 @@ If you want to view logs, please enter the container (`docker exec -it dmoj /bin
 2. _dmoj_db_ - mariadb instance. This image hasn't got any external ports, only services from project have access to it.
 The __db__ volume stores a persistent data from database, so it is not recommended to remove this folder at all. 
 The __sql__ volume contains the sql initialization file for first startup of the mariadb container.
-
+3. _dmoj_judge_ - instance of judge component. This container and _dmoj_ has a shared __problems__ volume.
 
 If you need to change ports, please, change the first port in mapping, 
 because the mapping is based on the following scheme: `<HOST:CONTAINER>`.
@@ -19,7 +19,22 @@ because the mapping is based on the following scheme: `<HOST:CONTAINER>`.
 ## Build instruction
 
 First, you need to install `docker` and `docker-compose` on your system.
-Secondly, you need to change _MYSQL_ROOT_PASSWORD_ and _MYSQL_PASSWORD_ for __dmoj_db__ in the _docker-compose.yml_ file.
+Secondly, you need to create _.env_db_ and _.env_judge_ env files with the following variables:
+
+.env_judge:
+
+    SERVER_HOST=dmoj
+    JUDGE_NAME=<place_name_for_site>
+    JUDGE_KEY=<place_key_for_site>
+
+.env_db:
+
+    MYSQL_ROOT_PASSWORD: <ROOT_PASSWORD>
+    MYSQL_DATABASE: test
+    MYSQL_USER: dmoj
+    MYSQL_PASSWORD: <USER_DMOJ_PASSWORD>
+
+ 
 If you change _MYSQL_PASSWORD_, please copy that value into _sql/init.sql_ for the password and for _local_setting.py_:
 
 init.sql:
@@ -53,6 +68,8 @@ If everything is OK (from the output and by using `docker-compose logs`), you ne
 1. Enter the __dmoj__ container: `docker exec -it dmoj /bin/bash`
 2. Run init script: `./dataLoading.bash` and follow the commands.
 3. Exit the container (`Ctrl+D` for example)
-4. Restart the whole Docker system: `docker-compose restart`
+4. Restart the whole dockerized project: `docker-compose restart`
 
-After that, you can use the system - congratulations!
+After that, enter the site via browser, sign in as root user and register judge component with data from `.env_judge` (name and key).
+
+If everything done correctly, you can use the system - congratulations!
