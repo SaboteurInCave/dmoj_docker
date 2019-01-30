@@ -18,6 +18,11 @@ services:
       - ./problems:/opt/problems
     networks:
       - dmoj_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "dmoj_db:3306"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
 
   dmoj_db:
     container_name: dmoj_db
@@ -27,6 +32,8 @@ services:
       MYSQL_DATABASE: test
       MYSQL_USER: dmoj
       MYSQL_PASSWORD: qwerty
+    ports:
+      - 3306:3306
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
