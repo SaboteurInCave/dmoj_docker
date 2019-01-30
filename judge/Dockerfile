@@ -3,9 +3,11 @@ MAINTAINER saboteurinacave@gmail.com
 
 # docker file was taken from https://hub.docker.com/r/dmoj/judge-base with some improvements
 
+RUN groupadd -r judge && useradd -r -g judge judge
+
 # ubuntu requirements
 RUN apt update -qqy && \
-apt install git python python2.7-dev python3 python-pip gcc g++ wget file build-essential llvm clang -qqy && \
+apt install git python python2.7-dev python3 python-pip gcc g++ fpc wget file build-essential llvm clang -qqy && \
 apt clean
 
 # install python requirements
@@ -23,3 +25,5 @@ RUN mkdir -p config
 COPY judge.yml config
 
 RUN env DMOJ_REDIST=1 python setup.py develop && rm -rf build/
+
+USER judge
