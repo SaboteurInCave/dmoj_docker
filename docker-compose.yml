@@ -17,11 +17,10 @@ services:
     volumes:
       - ./problems:/opt/problems
     depends_on:
-      - database
-  database:
+      - dmoj_db
+  dmoj_db:
     container_name: dmoj_db
     image: mariadb:latest
-    hostname: database
     environment:
       MYSQL_ROOT_PASSWORD: qwerty
       MYSQL_DATABASE: test

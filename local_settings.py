@@ -41,7 +41,7 @@ DATABASES = {
         'NAME': 'dmoj',
         'USER': 'dmoj',
         'PASSWORD': 'qwerty',
-        'HOST': 'database',
+        'HOST': 'dmoj_db',
         'OPTIONS': {
             'charset': 'utf8',
             'sql_mode': 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION',
