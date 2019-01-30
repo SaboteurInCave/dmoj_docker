@@ -5,7 +5,7 @@ MAINTAINER saboteurinacave@gmail.com
 
 # ubuntu requirements
 RUN apt update -qqy && \
-apt install git python python2.7-dev python3 python-pip gcc g++ wget file build-essential llvm clang --qqy && \
+apt install git python python2.7-dev python3 python-pip gcc g++ wget file build-essential llvm clang -qqy && \
 apt clean
 
 # install python requirements
