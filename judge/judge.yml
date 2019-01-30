@@ -1,0 +1,14 @@
+problem_storage_root: /problems
+runtime:
+  as_x64: /usr/bin/as
+  ld_x64: /usr/bin/ld
+  sed: /bin/sed
+  awk: /usr/bin/awk
+  gcc: /usr/bin/gcc
+  g++: /usr/bin/g++
+  g++11: /usr/bin/g++
+  clang: /usr/bin/clang
+  clang++: /usr/bin/clang++
+  fpc: /usr/bin/fpc
+  python: /usr/bin/python
+  python3: /usr/bin/python3

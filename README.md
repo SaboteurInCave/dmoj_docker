@@ -4,13 +4,12 @@
 
 docker-compose.yml contains inital settings for three images:
 
-1. _dmoj_ - web interface with nginx and django. 
+1. _dmoj_ - web interface with nginx and django + judger. 
 This image has __problems__ volume, which stores a problem data. 
 If you want to view logs, please enter the container (`docker exec -it dmoj /bin/bash`) and find the __/tmp__ directory inside of container. 
 2. _dmoj_db_ - mariadb instance. This image hasn't got any external ports, only services from project have access to it.
 The __db__ volume stores a persistent data from database, so it is not recommended to remove this folder at all. 
 The __sql__ volume contains the sql initialization file for first startup of the mariadb container.
-3. _dmoj_judge_ - TODO: describe later
 
 
 If you need to change ports, please, change the first port in mapping, 

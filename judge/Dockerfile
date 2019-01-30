@@ -1,0 +1,24 @@
+FROM ubuntu:latest
+MAINTAINER saboteurinacave@gmail.com
+
+# docker file was taken from https://hub.docker.com/r/dmoj/judge-base with some improvements
+
+# ubuntu requirements
+RUN apt update -qqy && \
+apt install git python python2.7-dev python3 python-pip gcc g++ wget file build-essential llvm clang --qqy && \
+apt clean
+
+# install python requirements
+RUN pip install pyyaml watchdog cython ansi2html termcolor && rm -rf ~/.cache
+
+# create problems directory
+RUN mkdir -p /problems
+
+# clone judge system
+RUN git clone https://github.com/DMOJ/judge
+WORKDIR /judge
+
+#
+RUN env DMOJ_REDIST=1 python setup.py develop && rm -rf build/
+
+ENTRYPOINT ["/judge/docker-entry"]

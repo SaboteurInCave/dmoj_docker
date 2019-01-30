@@ -4,7 +4,7 @@ services:
   dmoj:
     container_name: dmoj
     build:
-      context: .
+      context: web
     ports:
       - 8000:8000
       - 9999:9999
@@ -13,7 +13,7 @@ services:
       - 15101:15101
       - 15102:15102
     volumes:
-      - ./problems:/opt/problems
+      - problems:/opt/problems
     depends_on:
       - dmoj_db
     healthcheck:
@@ -33,3 +33,13 @@ services:
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
+
+  dmoj_judge:
+    container_name: dmoj_judge
+    build:
+      context: judge
+    volumes:
+      - problems:/problems
+
+volumes:
+  problems:

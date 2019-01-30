@@ -146,10 +146,10 @@ TERMS_OF_SERVICE_URL = '//dmoj.ca/tos' # Use a flatpage.
 # You should change this to something your judges can actually connect to
 # (e.g., a port that is unused and unblocked by a firewall).
 PROBLEM_DATA_ROOT = '/opt/problems'
-BRIDGED_JUDGE_ADDRESS = [('localhost', 9999)]
+BRIDGED_JUDGE_ADDRESS = [('dmoj_judge', 9999)]
 
 # The bridged daemon bind address and port to communicate with the site.
-BRIDGED_DJANGO_ADDRESS = [('localhost', 9998)]
+BRIDGED_DJANGO_ADDRESS = [('dmoj_judge', 9998)]
 
 ## DMOJ features.
 # Set to True to enable full-text searching for problems.
@@ -166,7 +166,7 @@ BAD_MAIL_PROVIDERS = set()
 #EVENT_DAEMON_POST = '<ws:// URL to post to>'
 
 # If you are using the defaults from the guide, it is this:
-#EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
+EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 
 # These are the publicly accessed interface configurations.
 # They should match those used by the script.
@@ -174,6 +174,10 @@ BAD_MAIL_PROVIDERS = set()
 #EVENT_DAEMON_GET_SSL = '<public wss:// URL for clients>'
 #EVENT_DAEMON_POLL = '<public URL to access the HTTP long polling of event server>'
 # i.e. the path to /channels/ exposed by the daemon, through whatever proxy setup you have.
+
+EVENT_DAEMON_GET = 'ws://127.0.0.1/event/'
+EVENT_DAEMON_GET_SSL = 'wss://127.0.0.1/event/'  # Optional
+EVENT_DAEMON_POLL = '/channels/'
 
 # Using our standard nginx configuration, these should be.
 #EVENT_DAEMON_GET = 'ws://<your domain>/event/'

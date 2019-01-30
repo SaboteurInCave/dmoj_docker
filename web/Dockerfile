@@ -9,7 +9,8 @@ apt install nodejs -qqy && \
 apt install npm -qqy && \
 apt install mariadb-server libmysqlclient-dev -qqy && \
 apt install nginx -qqy && \
-apt install supervisor -qqy
+apt install supervisor -qqy && \
+apt clean
 
 # npm dependencies
 RUN npm install -g sass pleeease-cli && npm install qu ws simplesets
@@ -21,7 +22,7 @@ WORKDIR /opt/dmoj
 # clone site and instal python dependencies
 RUN git clone https://github.com/DMOJ/site.git
 RUN cd site && git submodule init && git submodule update && \
-pip install -r requirements.txt && pip install 'mysqlclient < 1.4' && pip install uwsgi
+pip install -r requirements.txt && pip install 'mysqlclient < 1.4' && pip install uwsgi && rm -rf ~/.cache
 # important note: on mysqlclient==1.4 everything is broken!
 
 # copy site settings
