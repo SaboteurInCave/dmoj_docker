@@ -40,6 +40,7 @@ python manage.py compilemessages && \
 python manage.py compilejsi18n
 
 COPY dataLoading.bash .
+RUN chmod u+x dataLoading.bash
 
 # copy nginx configiration
 COPY nginx.conf /etc/nginx/sites-available/nginx.conf

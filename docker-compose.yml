@@ -16,8 +16,9 @@ services:
       - 15102:15102
     volumes:
       - ./problems:/opt/problems
-    depends_on:
-      - dmoj_db
+    networks:
+      - dmoj_network
+
   dmoj_db:
     container_name: dmoj_db
     image: mariadb:latest
@@ -29,3 +30,9 @@ services:
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
+    networks:
+    - dmoj_network
+
+
+networks:
+    dmoj_network:
