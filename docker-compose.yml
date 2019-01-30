@@ -14,8 +14,6 @@ services:
       - 15102:15102
     volumes:
       - ./problems:/opt/problems
-    networks:
-      - dmoj_network
     depends_on:
       - dmoj_db
     healthcheck:
@@ -35,9 +33,3 @@ services:
     volumes:
       - ./db:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
-    networks:
-    - dmoj_network
-
-
-networks:
-    dmoj_network:
